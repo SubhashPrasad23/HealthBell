@@ -8,6 +8,22 @@ const MediStore = (set) => ({
       medicines: [medicine, ...state.medicines],
     }));
   },
+  removeMedicine: (medicineId) => {
+    set((state) => {
+      const newMedicines = state.medicines.filter(
+        (med) => med.id !== medicineId
+      );
+      return { medicines: newMedicines };
+    });
+  },
+  updateMedicine: (updatedMedicine) => {
+    set((state) => {
+      const updatedMedicines = state.medicines.map((medicine) =>
+        medicine.id === updatedMedicine.id ? updatedMedicine : medicine
+      );
+      return { medicines: updatedMedicines };
+    });
+  },
 });
 
 const useMediStore = create(
